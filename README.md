@@ -32,7 +32,7 @@ It works fine on my Mac OS X 10.9.1 with Sublime Text Build 3047.
     
     Replace the first line with 
     
-        #!/usr/local/bin/node` 
+        #!/usr/local/bin/node
     
     (the path to nodejs can be different on your Mac)
 
