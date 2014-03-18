@@ -1,3 +1,7 @@
 { 
-	"chrome_path":"E:\\Users\\houfeng-win7\\AppData\\Local\\360Chrome\\Chrome\\Application\\360Chrome.exe"
+	"chrome_path":"/Applications/Google\\ Chrome.app",
+	"nodejs_path":"/usr/local/bin/node",
+	"inspector":"/usr/local/bin/node-inspector",
+	"debug_port":3333,
+	"web_port":8080
 }

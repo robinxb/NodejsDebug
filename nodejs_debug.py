@@ -2,11 +2,16 @@ from subprocess import Popen
 import re
 import sublime, sublime_plugin
 import webbrowser
-
-p = 0
-p2 = 0
+import subprocess  
  
 SETTINGS_FILE = "nodejs_debug.sublime-settings"
+config = sublime.load_settings(SETTINGS_FILE)
+chrome_path = config.get('chrome_path',"")
+nodejs_path = config.get('nodejs_path',"")
+inspector_path = config.get('inspector',"")
+debug_port = config.get('debug_port',"")
+web_port = config.get('web_port',"")
+
 
 class NodejsDebugCommand(sublime_plugin.TextCommand):
   def run(self, edit):
@@ -18,22 +23,17 @@ class NodejsDebugCommand(sublime_plugin.TextCommand):
     window.run_command('save')
 
     regx = re.compile(" ")
-    cmd = "cmd.exe /K node --debug-brk " + regx.sub("\ ", self.view.file_name());
-    p = Popen(cmd) 
-     
-    p2 = Popen("node-inspector.cmd --web-port=9901")
-
+    cmd = nodejs_path +" --debug-brk=%d "%(debug_port) + regx.sub("\ ", self.view.file_name());
+    cmd2 = inspector_path + " --web-port=%s --debug-port=%s"%(web_port, debug_port) 
+    Popen(cmd, shell = True) 
+    Popen(inspector_path, shell = True)
     sublime.set_timeout(self.openChrome,300)
   
 
   def openChrome(self):
       
-    url = "localhost:9901/debug?port=5858"
-
-    config = sublime.load_settings(SETTINGS_FILE)
-    chrome_path = config.get('chrome_path',"") 
-    Popen(chrome_path+" "+url) 
- 
-    # webbrowser.open_new(url)   
-    # self.view.run_command("open_browser")
+    url = "http://localhost:%d/debug?port=%d"%(web_port, debug_port)
+    cmd = "/usr/bin/open " + chrome_path + url
+    print(cmd)
+    subprocess.Popen("/usr/bin/open " + url, shell = True) 
  
