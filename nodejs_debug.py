@@ -1,8 +1,6 @@
 from subprocess import Popen
 import re
 import sublime, sublime_plugin
-import webbrowser
-import subprocess  
  
 SETTINGS_FILE = "nodejs_debug.sublime-settings"
 config = sublime.load_settings(SETTINGS_FILE)
@@ -34,6 +32,5 @@ class NodejsDebugCommand(sublime_plugin.TextCommand):
       
     url = "http://localhost:%d/debug?port=%d"%(web_port, debug_port)
     cmd = "/usr/bin/open " + chrome_path + url
-    print(cmd)
-    subprocess.Popen("/usr/bin/open " + url, shell = True) 
+    Popen("/usr/bin/open " + url, shell = True) 
  

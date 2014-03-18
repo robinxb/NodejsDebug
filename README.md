@@ -1,6 +1,7 @@
-a  simple plugin for sublime text2 to debug node file  in  WebKit based browser.(os:window)
+A simple plugin for sublime text2 to debug node file  in Chorme based browser.(os:**MacOS**)
 
-## Getting Started
+I've port this to MacOS.
+It works fine on my Mac OS X 10.9.1 with Sublime Text Build 3047.
 
 
 ### Requirements
@@ -8,7 +9,7 @@ a  simple plugin for sublime text2 to debug node file  in  WebKit based browser.
 * [nodeJS](http://github.com/ry/node) version >0.6.0 
 * [npm](http://github.com/isaacs/npm)
 * [node-inspector](https://github.com/dannycoates/node-inspector)
-* A WebKit based browser: Chrome, Safari, etc.
+* Google Chrome
 
 ### Install 
 
@@ -23,15 +24,22 @@ a  simple plugin for sublime text2 to debug node file  in  WebKit based browser.
 
 3. open  the  'nodejs_debug.sublime-settings'  file in plugin folder and set the parameter 'chrome_path' using your browser path!
 
+4. Due to the limit of Python on MacOS, you **MUSH** do this before starting debug.
+
+        sudo vim /path/to/node-inspector
+    
+    By default, the path is at `/usr/local/bin/node-inspector`.You can use `which node-inspector` to find the path.
+    
+    Replace the first line with 
+    
+        #!/usr/local/bin/node` 
+    
+    (the path to nodejs can be different on your Mac)
+
 ### Debugging
 
-1. open a node.js file in sublime text 2
+1. open a node.js file in sublime text 3
 
 2. press ctrl+alt+b or click  item 'Nodejs Debug' on  contextmenu 
 
 then you can debug your code in browser .
-
-
-
-
-  
