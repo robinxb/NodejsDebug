@@ -21,16 +21,17 @@ class NodejsDebugCommand(sublime_plugin.TextCommand):
     window.run_command('save')
 
     regx = re.compile(" ")
-    cmd = nodejs_path +" --debug-brk=%d "%(debug_port) + regx.sub("\ ", self.view.file_name());
-    cmd2 = inspector_path + " --web-port=%s --debug-port=%s"%(web_port, debug_port) 
+    cmd = nodejs_path +" --debug-brk=%s "%(debug_port) + regx.sub("\ ", self.view.file_name());
+    cmd2 = inspector_path + " --web-port=%s --debug-port=%s"%(web_port, debug_port)
+    kill_cmd = "killall HUP node"
+    Popen(kill_cmd, shell = True) 
     Popen(cmd, shell = True) 
     Popen(inspector_path, shell = True)
     sublime.set_timeout(self.openChrome,300)
   
 
   def openChrome(self):
-      
-    url = "http://localhost:%d/debug?port=%d"%(web_port, debug_port)
-    cmd = "/usr/bin/open " + chrome_path + url
-    Popen("/usr/bin/open " + url, shell = True) 
+    url = " http://localhost:%s/debug?port=%s"%(web_port, debug_port)
+    cmd = "/usr/bin/open -a " + chrome_path + url
+    Popen(cmd, shell = True) 
  
